@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Saturn.Messages";
+
+message ItemData {
+    ItemType type = 1;
+    string master_id = 2;
+    int32 num = 3;
+}
+
+enum ItemType {
+    ITEM_TYPE_NONE = 0;
+    ITEM_TYPE_ACCOUNT_PROP = 1;
+    ITEM_TYPE_ITEM = 2;
+    ITEM_TYPE_REWARD_PACK = 3;
+}

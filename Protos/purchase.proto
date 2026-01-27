@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+import "common.proto";
+import "item.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Saturn.Messages";
+
+enum Age {
+    AGE_NONE = 0;
+    AGE_UNDER_16 = 1;
+    AGE_UNDER_20 = 2;
+    AGE_NO_LIMIT = 3;
+}
+
+message ProductItem {
+    string product_id = 1;
+    float price = 2;
+    string title = 3;
+    int32 coin = 4;
+    string description = 5;
+    string icon = 6;
+    string purchase_id = 7;
+    int32 limit = 8;
+}
+
+message Purchase {
+    int32 id = 1;
+    string product_id = 2;
+    int32 count = 3;
+    google.protobuf.Timestamp expiredate = 4;
+}
+
+message PurchaseListRequest {
+    CommonRequest head = 1;
+    Age age = 2;
+}
+
+message PurchaseListResponse {
+    CommonResponse head = 1;
+    repeated ProductItem product_list = 2;
+    repeated Purchase purchase_list = 3;
+}
+
+message PurchaseBuyRequest {
+    CommonRequest head = 1;
+    string receipt = 2;
+    string product_id = 3;
+    float price = 4;
+}
+
+message PurchaseBuyResponse {
+    CommonResponse head = 1;
+    repeated ItemData list = 2;
+    repeated Purchase purchase_list = 3;
+}
+
+message PurchaseArchiveRequest {
+    CommonRequest head = 1;
+}
+
+message PurchaseArchiveResponse {
+    CommonResponse head = 1;
+    repeated Purchase purchase_list = 3;
+}
+
+message PurchaseCheckRequest {
+    CommonRequest head = 1;
+    Age age = 2;
+    string product_id = 3;
+}

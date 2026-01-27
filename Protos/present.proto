@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "common.proto";
+import "item.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Saturn.Messages";
+
+enum PresentType {
+    PRESENT_TYPE_PRESENT = 0;
+    PRESENT_TYPE_PRESENT_OPENED = 1;
+    PRESENT_TYPE_LOGIN_BONUS = 2;
+    PRESENT_TYPE_LOGIN_BONUS_OPENED = 3;
+}
+
+message PresentData {
+    int32 present_id = 1;
+    PresentType present_type = 2;
+    google.protobuf.Timestamp create_time = 3;
+    google.protobuf.Timestamp expire_time = 4;
+    ItemData itemdata = 5;
+    string title = 6;
+    string description = 7;
+}
+
+message PresentListRequest {
+    CommonRequest head = 1;
+    PresentType type = 2;
+    int32 page = 3;
+}
+
+message PresentListResponse {
+    CommonResponse head = 1;
+    repeated PresentData present_list = 2;
+}
+
+message PresentOpenRequest {
+    CommonResponse head = 1;
+    repeated int32 present_id_list = 2;
+}

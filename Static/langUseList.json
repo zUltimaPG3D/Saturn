@@ -1,0 +1,20 @@
+{
+  "isSuccess": true,
+  "data": [
+    {
+      "langCulture": "ko_KR",
+      "name": "한국어(대한민국)",
+      "displayName": "한국어"
+    },
+    {
+      "langCulture": "en_US",
+      "name": "영어(미국)",
+      "displayName": "English"
+    },
+    {
+      "langCulture": "zh_CN",
+      "name": "중국어 간체(중국)",
+      "displayName": "中文"
+    }
+  ]
+}
