@@ -18,7 +18,6 @@ public class Info : ControllerBase
     public async Task<ActionResult> GetUserInfo()
     {
         var data = await Request.ToMessage<UserInfoRequest>();
-
         var response = new UserInfoResponse
         {
             Head = new CommonResponse()
@@ -33,7 +32,7 @@ public class Info : ControllerBase
             return RequestHelpers.Protobuf(response);
         }
         
-        response.PropertyList.AddRange(user.PropertyList);
+        response.PropertyList.AddRange(user.PropertyList.Where(p => data.KeyList.Contains(p.Key)));
         
         return RequestHelpers.Protobuf(response);
     }
