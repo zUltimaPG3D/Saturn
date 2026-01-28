@@ -6,45 +6,45 @@ import "google/protobuf/timestamp.proto";
 option csharp_namespace = "Saturn.Messages";
 
 enum FriendStatus {
-    FRIEND_STATUS_NONE = 0;
-    FRIEND_STATUS_FRIEND = 1;
-    FRIEND_STATUS_SEND_REQUEST = 2;
-    FRIEND_STATUS_RECV_REQUEST = 3;
-    FRIEND_STATUS_BLOCKED = 4;
-    FRIEND_STATUS_OWN = 5;
+  FRIEND_STATUS_NONE = 0;
+  FRIEND_STATUS_FRIEND = 1;
+  FRIEND_STATUS_SEND_REQUEST = 2;
+  FRIEND_STATUS_RECV_REQUEST = 3;
+  FRIEND_STATUS_BLOCKED = 4;
+  FRIEND_STATUS_OWN = 5;
 }
 
 message SupportAccount {
-    int64 user_id = 1;
-    string public_id = 2;
-    string player_name = 3;
-    string player_data = 4;
-    google.protobuf.Timestamp update_time = 5;
-    FriendStatus status = 6;
+  int64 user_id = 1;
+  string public_id = 2;
+  string player_name = 3;
+  string player_data = 4;
+  google.protobuf.Timestamp update_time = 5;
+  FriendStatus status = 6;
 }
 
 message FriendSearchRequest {
-    CommonRequest head = 1;
-    string public_id = 2;
+  CommonRequest head = 1;
+  string public_id = 2;
 }
 
 message FriendSearchResponse {
-    CommonResponse head = 1;
-    repeated SupportAccount data = 2;
+  CommonResponse head = 1;
+  repeated SupportAccount data = 2;
 }
 
 message FriendListRequest {
-    CommonRequest head = 1;
-    FriendStatus status = 2;
+  CommonRequest head = 1;
+  FriendStatus status = 2;
 }
 
 message FriendListResponse {
-    CommonResponse head = 1;
-    repeated SupportAccount data = 2;
+  CommonResponse head = 1;
+  repeated SupportAccount data = 2;
 }
 
 message FriendUpdateRequest {
-    CommonRequest head = 1;
-    int64 friend_user_id = 2;
-    FriendStatus status = 3;
+  CommonRequest head = 1;
+  int64 friend_user_id = 2;
+  FriendStatus status = 3;
 }

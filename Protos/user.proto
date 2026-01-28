@@ -1,47 +1,47 @@
 syntax = "proto3";
 
 import "common.proto";
-import "present.proto";
 import "google/protobuf/timestamp.proto";
+import "present.proto";
 
 option csharp_namespace = "Saturn.Messages";
 
 message UserProperty {
-    string key = 1;
-    string value = 2;
+  string key = 1;
+  string value = 2;
 }
 
 message UserUpdateRequest {
-    CommonRequest head = 1;
-    repeated UserProperty property_list = 2;
+  CommonRequest head = 1;
+  repeated UserProperty property_list = 2;
 }
 
 message UserInfoRequest {
-    CommonRequest head = 1;
-    repeated string key_list = 2;
+  CommonRequest head = 1;
+  repeated string key_list = 2;
 }
 
 message UserInfoResponse {
-    CommonResponse head = 1;
-    repeated UserProperty property_list = 2;
+  CommonResponse head = 1;
+  repeated UserProperty property_list = 2;
 }
 
 message UserHomeRequest {
-    CommonRequest head = 1;
-    bool send_heart = 2;
+  CommonRequest head = 1;
+  bool send_heart = 2;
 }
 
 message UserHomeResponse {
-    CommonResponse head = 1;
-    int32 loginbonus_num = 2;
-    int32 presentbox_num = 3;
-    repeated PresentData loginbonus_list = 4;
-    repeated string friend_word_list = 5;
-    google.protobuf.Timestamp heart_send_time = 6;
-    google.protobuf.Timestamp friend_recv_request_time = 7;
-    google.protobuf.Timestamp friend_add_time = 8;
-    repeated Offer offer_list = 9;
-    google.protobuf.Timestamp latest_news_time = 10;
+  CommonResponse head = 1;
+  int32 loginbonus_num = 2;
+  int32 presentbox_num = 3;
+  repeated PresentData loginbonus_list = 4;
+  repeated string friend_word_list = 5;
+  google.protobuf.Timestamp heart_send_time = 6;
+  google.protobuf.Timestamp friend_recv_request_time = 7;
+  google.protobuf.Timestamp friend_add_time = 8;
+  repeated Offer offer_list = 9;
+  repeated string news_boot_list = 10;
 }
 
 message Offer {
@@ -56,12 +56,12 @@ message Offer {
 }
 
 message UserOfferRequest {
-    CommonRequest head = 1;
-    string offer_id = 2;
-    OfferStatus status = 3;
+  CommonRequest head = 1;
+  string offer_id = 2;
+  OfferStatus status = 3;
 }
 
 enum OfferStatus {
-    OFFER_STATUS_ORDERING = 0;
-    OFFER_STATUS_CANCEL = 1;
+  OFFER_STATUS_ORDERING = 0;
+  OFFER_STATUS_CANCEL = 1;
 }

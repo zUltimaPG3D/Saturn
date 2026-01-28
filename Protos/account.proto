@@ -5,62 +5,62 @@ import "common.proto";
 option csharp_namespace = "Saturn.Messages";
 
 enum AccountPropType {
-    PROPTYPE_NONE = 0;
-    PROPTYPE_EMAIL = 1;
-    PROPTYPE_PASSWORD = 2;
-    PROPTYPE_BIRTHDAY = 3;
-    PROPTYPE_PROVIDER = 4;
+  PROPTYPE_NONE = 0;
+  PROPTYPE_EMAIL = 1;
+  PROPTYPE_PASSWORD = 2;
+  PROPTYPE_BIRTHDAY = 3;
+  PROPTYPE_PROVIDER = 4;
 }
 
 message AccountLoginRequest {
-    CommonRequest head = 1;
-    string device_id = 2;
-    string public_id = 3;
+  CommonRequest head = 1;
+  string device_id = 2;
+  string public_id = 3;
 }
 
 message AccountLoginResponse {
-    CommonResponse head = 1;
-    string public_id = 2;
-    int32 master = 3;
-    int32 resource = 4;
-    int32 is_savedata_expired = 5;
-    Status status = 6;
-    string redirect_host = 7;
-    Summary player_summary = 8;
-    ExpireStatus expire_status = 9;
+  CommonResponse head = 1;
+  string public_id = 2;
+  int32 master = 3;
+  int32 resource = 4;
+  int32 is_savedata_expired = 5;
+  Status status = 6;
+  string redirect_host = 7;
+  Summary player_summary = 8;
+  ExpireStatus expire_status = 9;
 }
 
 enum ExpireStatus {
-    EXPIRE_STATUS_NONE = 0;
-    EXPIRE_STATUS_NEW_DEVICE = 1;
-    EXPIRE_STATUS_TOKEN_MISSMATCH = 2;
+  EXPIRE_STATUS_NONE = 0;
+  EXPIRE_STATUS_NEW_DEVICE = 1;
+  EXPIRE_STATUS_TOKEN_MISSMATCH = 2;
 }
 
 enum Status {
-    STATUS_NORMAL = 0;
-    STATUS_ADMIN = 1;
-    STATUS_STAFF = 2;
-    STATUS_WARN = 3;
-    STATUS_BLOCK = 4;
+  STATUS_NORMAL = 0;
+  STATUS_ADMIN = 1;
+  STATUS_STAFF = 2;
+  STATUS_WARN = 3;
+  STATUS_BLOCK = 4;
 }
 
 message Summary {
-    int32 puzzle_level = 1;
-    int32 coin_count = 2;
+  int32 puzzle_level = 1;
+  int32 coin_count = 2;
 }
 
 message AccountPropsRequest {
-    CommonRequest head = 1;
-    AccountPropType prop_type = 2;
-    string prop_value = 3;
+  CommonRequest head = 1;
+  AccountPropType prop_type = 2;
+  string prop_value = 3;
 }
 
 message AccountPropsGetRequest {
-    CommonRequest head = 1;
-    AccountPropType prop_type = 2;
+  CommonRequest head = 1;
+  AccountPropType prop_type = 2;
 }
 
 message AccountPropsGetResponse {
-    CommonRequest head = 1;
-    string value = 2;
+  CommonRequest head = 1;
+  string value = 2;
 }

@@ -5,11 +5,11 @@ import "common.proto";
 option csharp_namespace = "Saturn.Messages";
 
 message DebugCommandRequest {
-    CommonRequest head = 1;
-    string command = 2;
+  CommonRequest head = 1;
+  string command = 2;
 }
 
 message DebugCommandResponse {
-    CommonResponse head = 1;
-    string response = 2;
+  CommonResponse head = 1;
+  string response = 2;
 }
