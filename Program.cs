@@ -10,6 +10,26 @@ internal partial class Program
 {
     public static Random RNG = new();
     public static WebApplication? Application;
+        
+    private static readonly FileExtensionContentTypeProvider Provider = new()
+    {
+        Mappings =
+        {
+            [".cpk"] = "application/octet-stream; charset=binary",
+            [".hash"] = "text/plain; charset=utf-8",
+            [".bundle"] = "application/octet-stream; charset=binary",
+        }
+    };
+    
+    private static void UseStaticFiles(WebApplication app, string path)
+    {
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(GameInfo.StaticContentPath, path)),
+            RequestPath = $"/{path}",
+            ContentTypeProvider = Provider
+        });
+    }
     
     private static void Main(string[] args)
     {
@@ -56,38 +76,10 @@ internal partial class Program
             await next();
         });
         
-        var staticPath = Path.Combine(builder.Environment.ContentRootPath, "Static", "Content");
-        
-        var provider = new FileExtensionContentTypeProvider
-        {
-            Mappings =
-            {
-                [".cpk"] = "application/octet-stream; charset=binary",
-                [".hash"] = "text/plain; charset=utf-8",
-                [".bundle"] = "application/octet-stream; charset=binary",
-            }
-        };
-        
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(Path.Combine(staticPath, "files")),
-            RequestPath = "/files",
-            ContentTypeProvider = provider
-        });
-        
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(Path.Combine(staticPath, "assets")),
-            RequestPath = "/assets",
-            ContentTypeProvider = provider
-        });
-        
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(Path.Combine(staticPath, "master01")),
-            RequestPath = "/master01",
-            ContentTypeProvider = provider
-        });
+        UseStaticFiles(app, "files");
+        UseStaticFiles(app, "assets");
+        UseStaticFiles(app, "master01");
+        UseStaticFiles(app, "site");
         
         app.UseMiddleware<ToroUserMiddleware>();
         app.UseRouting();
