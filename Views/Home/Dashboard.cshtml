@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Account Dashboard";
+    Layout = "_Layout";
+}
+<h2>Dashboard</h2>
+@if ((bool)ViewData["Authenticated"])
+{
+    <h3>Account Dashboard</h3>
+    <h4>Data Controls</h4>
+    <p>Before doing any of this, make sure the game isn't running!</p>
+    {
+        async Task RenderAction(string displayName, string internalName)
+        {
+            <form method="post" action="/account/controlAction">
+                <input type="hidden" id="action" name="action" value="@internalName" />
+                <button type="submit">@displayName</button>
+            </form>
+        }
+
+        await RenderAction("999,999 Stars", "maxStars");
+        await RenderAction("Max Hearts", "maxHearts");
+        await RenderAction("+10,000 Coins", "giveCoins");
+    }
+
+    <p>@ViewData["Error"]</p>
+}
+else
+{
+    <h3>Login</h3>
+    <form method="post" action="/account/login/withNid">
+        <input id="NID" name="NID" type="number" placeholder="NID" />
+        <button type="submit">Login</button>
+    </form>
+
+    <p>@ViewData["Error"]</p>
+}

@@ -38,6 +38,8 @@ internal partial class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllers();
+        builder.Services.AddControllersWithViews();
+        builder.Services.AddRazorPages();
         
         builder.Services.AddDbContext<GameDbContext>(options => options.UseSqlite("Data Source=game.db"));
         builder.Services.AddScoped<DbHelperService>();
@@ -83,7 +85,9 @@ internal partial class Program
         
         app.UseMiddleware<ToroUserMiddleware>();
         app.UseRouting();
+        app.MapRazorPages();
         app.MapControllers();
+        app.MapDefaultControllerRoute();
 
         Application = app;
         app.Run();
