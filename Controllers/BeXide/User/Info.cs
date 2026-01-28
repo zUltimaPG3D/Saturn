@@ -32,7 +32,7 @@ public class Info : ControllerBase
             return RequestHelpers.Protobuf(response);
         }
         
-        response.PropertyList.AddRange(user.PropertyList.Where(p => data.KeyList.Contains(p.Key)));
+        response.PropertyList.AddRange(data.KeyList.Count == 0 ? user.PropertyList : user.PropertyList.Where(p => data.KeyList.Contains(p.Key)));
         
         return RequestHelpers.Protobuf(response);
     }
