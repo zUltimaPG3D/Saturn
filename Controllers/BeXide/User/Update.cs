@@ -32,8 +32,12 @@ public class Update : ControllerBase
             return RequestHelpers.Protobuf(response);
         }
 
-        user.PropertyList.Clear();
-        user.PropertyList.AddRange(data.PropertyList);
+        var lookup = data.PropertyList.ToDictionary(x => x.Key);
+        var merged = user.PropertyList
+            .Select(p => lookup.TryGetValue(p.Key, out var replacement) ? replacement : p)
+            .ToList();
+        merged.AddRange(data.PropertyList.Where(d => !user.PropertyList.Any(u => u.Key == d.Key)));
+        user.PropertyList = merged;
         await user.UpdateAsync();
         
         response.PropertyList.AddRange(user.PropertyList);
