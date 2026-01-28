@@ -3,18 +3,23 @@
   "data": [
     {
       "langCulture": "ko_KR",
-      "name": "한국어(대한민국)",
+      "name": "한국어",
       "displayName": "한국어"
     },
     {
       "langCulture": "en_US",
       "name": "영어(미국)",
-      "displayName": "English"
+      "displayName": "ENGLISH"
     },
     {
       "langCulture": "zh_CN",
       "name": "중국어 간체(중국)",
-      "displayName": "中文"
+      "displayName": "简体中文"
+    },
+    {
+      "langCulture": "zh_TW",
+      "name": "전통 중국어(대만)",
+      "displayName": "繁體中文"
     }
   ]
 }
