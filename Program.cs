@@ -13,6 +13,8 @@ internal partial class Program
     
     private static void Main(string[] args)
     {
+        GameInfo.Initialize();
+        
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllers();

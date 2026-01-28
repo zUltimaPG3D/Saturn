@@ -32,6 +32,22 @@ public class MasterData : ControllerBase
             return RequestHelpers.Protobuf(response);
         }
         
+        foreach (string path in Directory.GetFiles(Path.Combine(GameInfo.StaticContentPath, "master01")))
+        {
+            string name = Path.GetFileNameWithoutExtension(path);
+            byte[] bytes = await System.IO.File.ReadAllBytesAsync(path);
+            byte[] hashBytes = MD5.HashData(bytes);
+            string hash = Convert.ToHexString(hashBytes);
+
+            response.Data.Add(new Messages.MasterData()
+            {
+                Name = name,
+                Hash = hash,
+                Url = GameInfo.MakeURL($"/master01/{name}.json"),
+                Size = bytes.Length
+            });
+        }
+
         return RequestHelpers.Protobuf(response);
     }
 }

@@ -15,24 +15,34 @@ internal static class GameInfo
     public static string IP = "192.168.1.20";
     public static int Port = 15154;
     public static bool IsHTTPS = false;
-
     public static string MaintenanceMessage = "";
+    public static string StaticContentPath = "";
+
+    public static void Initialize()
+    {
+        StaticContentPath = Path.Combine(Environment.CurrentDirectory, "Static", "Content");
+    }
 
     public static string BaseURL
     {
         get
         {
-            StringBuilder stringBuilder = new();
-            stringBuilder.Append(IsHTTPS ? "https" : "http");
-            stringBuilder.Append("://");
-            stringBuilder.Append(IP);
-            if (Port != 80 && Port != 443)
-            {
-                stringBuilder.Append(':');
-                stringBuilder.Append(Port);
-            }
-            stringBuilder.Append('/');
-            return stringBuilder.ToString();
+            return MakeURL("/");
         }
+    }
+    
+    public static string MakeURL(string path)
+    {
+        StringBuilder stringBuilder = new();
+        stringBuilder.Append(IsHTTPS ? "https" : "http");
+        stringBuilder.Append("://");
+        stringBuilder.Append(IP);
+        if (Port != 80 && Port != 443)
+        {
+            stringBuilder.Append(':');
+            stringBuilder.Append(Port);
+        }
+        stringBuilder.Append(path);
+        return stringBuilder.ToString();
     }
 }
