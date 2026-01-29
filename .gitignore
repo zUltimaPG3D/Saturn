@@ -54,5 +54,5 @@ TestResult.xml
 nunit-*.xml
 
 # Game
-game.db*
+*.db*
 Reference/
