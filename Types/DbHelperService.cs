@@ -17,40 +17,40 @@ public class DbHelperService(GameDbContext db)
     
     public static async Task Initialize()
     {
-        using var scope = Program.Application!.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
+        var (scope, service) = Get();
         await service.IRunMigrations();
+        scope.Dispose();
     }
     
     public static async Task<ToroUser?> GetUserFromTokenAsync(string token)
     {
-        using var scope = Program.Application!.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
+        var (scope, service) = Get();
         var user = await service.IGetUserFromTokenAsync(token);
+        scope.Dispose();
         return user;
     }
     
     public static async Task<ToroUser?> GetUserFromNIDAsync(string nid)
     {
-        using var scope = Program.Application!.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
+        var (scope, service) = Get();
         var user = await service.IGetUserFromNIDAsync(nid);
+        scope.Dispose();
         return user;
     }
     
     public static async Task<List<SupportAccount>> GetAllSupportAccounts(ulong myId)
     {
-        using var scope = Program.Application!.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
+        var (scope, service) = Get();
         var users = await service.IGetAllUsers();
+        scope.Dispose();
         return [.. users.Select(u => u.ToSupportAccount(myId == u.PublicID))];
     }
     
     public static async Task<ToroUser> CreateNewOrGet(string id)
     {
-        using var scope = Program.Application!.Services.CreateScope();
-        var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
+        var (scope, service) = Get();
         var user = await service.ICreateNewOrGet(id);
+        scope.Dispose();
         return user;
     }
     
