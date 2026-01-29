@@ -74,7 +74,7 @@ internal partial class Program
             request.Path = Normalize(request.Path.Value!);
             request.PathBase = Normalize(request.PathBase.Value!);
         
-            Console.WriteLine($"{context.Request.Method} request to {context.Request.GetDisplayUrl()}");
+            // Console.WriteLine($"{context.Request.Method} request to {context.Request.GetDisplayUrl()}");
             await next();
         });
         
