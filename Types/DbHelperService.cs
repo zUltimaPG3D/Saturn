@@ -15,6 +15,13 @@ public class DbHelperService(GameDbContext db)
         return (scope, service);
     }
     
+    public static async Task Initialize()
+    {
+        using var scope = Program.Application!.Services.CreateScope();
+        var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
+        await service.IRunMigrations();
+    }
+    
     public static async Task<ToroUser?> GetUserFromTokenAsync(string token)
     {
         using var scope = Program.Application!.Services.CreateScope();
@@ -45,6 +52,11 @@ public class DbHelperService(GameDbContext db)
         var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
         var user = await service.ICreateNewOrGet(id);
         return user;
+    }
+    
+    public async Task IRunMigrations()
+    {
+        await _db.Database.MigrateAsync();
     }
 
     public async Task<ToroUser?> IGetUserFromTokenAsync(string token)

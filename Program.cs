@@ -31,7 +31,7 @@ internal partial class Program
         });
     }
     
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         GameInfo.Initialize();
         
@@ -90,6 +90,8 @@ internal partial class Program
         app.MapDefaultControllerRoute();
 
         Application = app;
+        
+        await DbHelperService.Initialize();
         app.Run();
     }
 
