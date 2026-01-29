@@ -8,11 +8,11 @@ public class DbHelperService(GameDbContext db)
 {
     private readonly GameDbContext _db = db;
     
-    public static DbHelperService Get()
+    public static (IServiceScope, DbHelperService) Get()
     {
-        using var scope = Program.Application!.Services.CreateScope();
+        var scope = Program.Application!.Services.CreateScope();
         var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
-        return service;
+        return (scope, service);
     }
     
     public static async Task<ToroUser?> GetUserFromTokenAsync(string token)
