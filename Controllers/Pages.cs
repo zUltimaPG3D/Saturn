@@ -16,9 +16,10 @@ public class Pages : Controller
     [HttpGet("home")]
     public async Task<ActionResult> Home()
     {
-        var db = DbHelperService.Get();
-        int users = await db.Item2.IGetUserCount();
-        db.Item1.Dispose();
+        var (scope, service) = DbHelperService.Get();
+        int users = await service.IGetUserCount();
+        scope.Dispose();
+        
         ViewData["UserCount"] = users;
         return View("~/Views/Home/Index.cshtml");
     }
