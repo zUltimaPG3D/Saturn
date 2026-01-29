@@ -27,9 +27,7 @@ public class DbHelperService(GameDbContext db)
     {
         using var scope = Program.Application!.Services.CreateScope();
         var service = scope.ServiceProvider.GetRequiredService<DbHelperService>();
-        Console.WriteLine($"GetUserFromNIDAsync('{nid}')");
         var user = await service.IGetUserFromNIDAsync(nid);
-        Console.WriteLine($"Result -> {user}");
         return user;
     }
     
@@ -57,7 +55,6 @@ public class DbHelperService(GameDbContext db)
     
     public async Task<ToroUser?> IGetUserFromNIDAsync(string nid)
     {
-        Console.WriteLine($"IGetUserFromNIDAsync('{nid}')");
         var user = await _db.Users.FirstOrDefaultAsync(u => u.NID == nid);
         return user;
     }
