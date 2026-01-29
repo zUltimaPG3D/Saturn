@@ -35,8 +35,8 @@ public class Search : ControllerBase
         
         if (data.PublicId == "random")
         {
-            var users = await DbHelperService.GetAllSupportAccounts(user.PublicID);
-            response.Data.AddRange(users);
+            // var users = await DbHelperService.GetAllSupportAccounts(user.PublicID);
+            // response.Data.AddRange(users);
         }
         else
         {

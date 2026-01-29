@@ -35,9 +35,8 @@ public class List : ControllerBase
         
         // TODO: implement friends
         
-        var users = await DbHelperService.GetAllSupportAccounts(user.PublicID);
-        
-        response.Data.AddRange(users);
+        // var users = await DbHelperService.GetAllSupportAccounts(user.PublicID);
+        // response.Data.AddRange(users);
         
         return RequestHelpers.Protobuf(response);
     }
