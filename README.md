@@ -31,4 +31,6 @@ $ dotnet run
 ```
 - The server is now running!
 
+To edit the running port, you'll have to edit `Properties/launchSettings.json`.
+
 ---
