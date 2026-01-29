@@ -90,7 +90,7 @@ public class DbHelperService(GameDbContext db)
         if (exists)
         {
             var getUser = await _db.Users.FirstOrDefaultAsync(u => u.DeviceID == id);
-            return getUser;
+            return getUser!;
         }
         
         ToroUser user = new()
