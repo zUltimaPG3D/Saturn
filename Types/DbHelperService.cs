@@ -104,4 +104,9 @@ public class DbHelperService(GameDbContext db)
     {
         return _db.Users;
     }
+    
+    public async Task<int> IGetUserCount()
+    {
+        return await _db.Users.CountAsync();
+    }
 }
