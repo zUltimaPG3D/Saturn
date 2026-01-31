@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace Saturn.Helpers;
 
-public static partial class BXCrypt
+static internal partial class BXCrypt
 {
     public static void Initialize(string key, string iv, string head)
     {
