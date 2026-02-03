@@ -12,8 +12,8 @@ internal enum GameStatus
 internal static class GameInfo
 {
     public static GameStatus GameStatus = GameStatus.ONLINE;
-    public static string IP = "192.168.1.20";
-    public static int Port = 15154;
+    public static string IP = "onsen.pixelgun.plus";
+    public static int Port = 443;
     public static bool IsHTTPS = false;
     public static string MaintenanceMessage = "";
     public static string StaticContentPath = "";

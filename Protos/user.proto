@@ -42,26 +42,26 @@ message UserHomeResponse {
   google.protobuf.Timestamp friend_add_time = 8;
   repeated Offer offer_list = 9;
   repeated string news_boot_list = 10;
-}
 
-message Offer {
-  string id = 1;
-  string purchase_id = 2;
-  string title = 3;
-  google.protobuf.Timestamp start_time = 4;
-  google.protobuf.Timestamp end_time = 5;
-  string button = 6;
-  string image = 7;
-  string ornaments = 8;
+  message Offer {
+    string id = 1;
+    string purchase_id = 2;
+    string title = 3;
+    google.protobuf.Timestamp start_time = 4;
+    google.protobuf.Timestamp end_time = 5;
+    string button = 6;
+    string image = 7;
+    string ornaments = 8;
+  }
 }
 
 message UserOfferRequest {
   CommonRequest head = 1;
   string offer_id = 2;
   OfferStatus status = 3;
-}
 
-enum OfferStatus {
-  OFFER_STATUS_ORDERING = 0;
-  OFFER_STATUS_CANCEL = 1;
+  enum OfferStatus {
+    OFFER_STATUS_ORDERING = 0;
+    OFFER_STATUS_CANCEL = 1;
+  }
 }

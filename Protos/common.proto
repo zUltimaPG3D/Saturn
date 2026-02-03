@@ -9,12 +9,12 @@ message CommonRequest {
   int32 version = 2;
   Platform platform = 3;
   string environment = 4;
-}
 
-enum Platform {
-  PLATFORM_EDITOR = 0;
-  PLATFORM_APPLE = 1;
-  PLATFORM_GOOGLE = 2;
+  enum Platform {
+    PLATFORM_EDITOR = 0;
+    PLATFORM_APPLE = 1;
+    PLATFORM_GOOGLE = 2;
+  }
 }
 
 message CommonResponse {

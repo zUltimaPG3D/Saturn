@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Saturn.Helpers;
 using Saturn.Messages;
+using Status = Saturn.Messages.AccountLoginResponse.Types.Status;
 
 namespace Saturn.Types;
 

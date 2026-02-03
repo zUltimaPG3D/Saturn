@@ -28,25 +28,25 @@ message AccountLoginResponse {
   string redirect_host = 7;
   Summary player_summary = 8;
   ExpireStatus expire_status = 9;
-}
 
-enum ExpireStatus {
-  EXPIRE_STATUS_NONE = 0;
-  EXPIRE_STATUS_NEW_DEVICE = 1;
-  EXPIRE_STATUS_TOKEN_MISSMATCH = 2;
-}
+  enum ExpireStatus {
+    EXPIRE_STATUS_NONE = 0;
+    EXPIRE_STATUS_NEW_DEVICE = 1;
+    EXPIRE_STATUS_TOKEN_MISSMATCH = 2;
+  }
 
-enum Status {
-  STATUS_NORMAL = 0;
-  STATUS_ADMIN = 1;
-  STATUS_STAFF = 2;
-  STATUS_WARN = 3;
-  STATUS_BLOCK = 4;
-}
+  enum Status {
+    STATUS_NORMAL = 0;
+    STATUS_ADMIN = 1;
+    STATUS_STAFF = 2;
+    STATUS_WARN = 3;
+    STATUS_BLOCK = 4;
+  }
 
-message Summary {
-  int32 puzzle_level = 1;
-  int32 coin_count = 2;
+  message Summary {
+    int32 puzzle_level = 1;
+    int32 coin_count = 2;
+  }
 }
 
 message AccountPropsRequest {
