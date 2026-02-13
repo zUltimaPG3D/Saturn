@@ -64,6 +64,13 @@ public class DbHelperService(GameDbContext db)
         return user;
     }
     
+    public static async Task DeleteUserFromNIDAsync(string nid)
+    {
+        var (scope, service) = Get();
+        await service.IDeleteUserFromNIDAsync(nid);
+        scope.Dispose();
+    }
+    
     public async Task IRunMigrations()
     {
         await _db.Database.MigrateAsync();
@@ -149,5 +156,10 @@ public class DbHelperService(GameDbContext db)
     public async Task<int> IGetUserCount()
     {
         return await _db.Users.CountAsync();
+    }
+    
+    public async Task IDeleteUserFromNIDAsync(string nid)
+    {
+        await _db.Users.Where(u => u.NID == nid).ExecuteDeleteAsync();
     }
 }
