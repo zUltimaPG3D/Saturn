@@ -23,28 +23,29 @@ public class Search : ControllerBase
         {
             Head = new CommonResponse()
         };
-        
-        var user = HttpContext.Items["User"] as ToroUser;
-        if (user == null)
+
+        if (HttpContext.Items["User"] is not ToroUser user)
         {
             response.Head.Code = 403;
             response.Head.Message = "User with that pfSessionToken doesn't exist";
-            
+
             return RequestHelpers.Protobuf(response);
         }
-        
+
         if (data.PublicId == "random")
         {
-            // var users = await DbHelperService.GetAllSupportAccounts(user.PublicID);
-            // response.Data.AddRange(users);
+            var users = await DbHelperService.GetRandomSupportAccounts(user.PublicID);
+            response.Data.AddRange(users);
         }
         else
         {
-            var users = await DbHelperService.GetAllSupportAccounts(user.PublicID);
-            var userWithId = users.FirstOrDefault(u => u.PublicId == data.PublicId);
-            if (userWithId != null)
+            if (!string.IsNullOrWhiteSpace(data.PublicId))
             {
-                response.Data.Add(userWithId);
+                var userWithId = await DbHelperService.GetOneSupportAccount(user.PublicID, data.PublicId);
+                if (userWithId != null)
+                {
+                    response.Data.Add(userWithId);
+                }
             }
         }
         

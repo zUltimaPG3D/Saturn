@@ -39,12 +39,21 @@ public class DbHelperService(GameDbContext db)
         return user;
     }
     
-    public static async Task<List<SupportAccount>> GetAllSupportAccounts(ulong myId)
+    public static async Task<List<SupportAccount>> GetRandomSupportAccounts(ulong myId)
     {
         var (scope, service) = Get();
-        var users = await service.IGetAllUsers();
+        var users = await service.IGetRandomUsers(20);
         scope.Dispose();
         return [.. users.Select(u => u.ToSupportAccount(myId == u.PublicID))];
+    }
+    
+    public static async Task<SupportAccount?> GetOneSupportAccount(ulong myId, string searchId)
+    {
+        var (scope, service) = Get();
+        var u = await service.IGetUserFromPublicIDAsync(searchId);
+        scope.Dispose();
+        if (u == null) return null;
+        return u.ToSupportAccount(myId == u.PublicID);
     }
     
     public static async Task<ToroUser> CreateNewOrGet(string id)
@@ -70,6 +79,17 @@ public class DbHelperService(GameDbContext db)
     {
         var user = await _db.Users.FirstOrDefaultAsync(u => u.NID == nid);
         return user;
+    }
+    
+    public async Task<ToroUser?> IGetUserFromPublicIDAsync(string pid)
+    {
+        if (ulong.TryParse(pid, out var converted))
+        {
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.PublicID == converted);
+            return user;
+        }
+        
+        return null;
     }
 
     public async Task UpdateAsync(ToroUser user)
@@ -111,6 +131,14 @@ public class DbHelperService(GameDbContext db)
             UserType = Status.Normal
         };
         return user;
+    }
+    
+    public async Task<List<ToroUser>> IGetRandomUsers(int count)
+    {
+        var amount = await _db.Users.CountAsync();
+        var skipAmount = amount - count;
+        var skip = Random.Shared.Next(0, Math.Clamp(amount - count, 0, int.MaxValue));
+        return await _db.Users.Skip(skip).Take(count).ToListAsync();
     }
     
     public async Task<DbSet<ToroUser>> IGetAllUsers()
